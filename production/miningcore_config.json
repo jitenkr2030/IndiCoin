@@ -1,0 +1,185 @@
+# MiningCore Pool Configuration for IndiCoin
+# Production-ready configuration template
+
+{
+  "poolAddress": "1INDI1AbCdEfGhIjKlMnOpQrStUvWxYz123",  # Replace with actual pool address
+  "poolFee": 1.0,                                        # 1% pool fee
+  "poolFeeAddress": "1INDI1AbCdEfGhIjKlMnOpQrStUvWxYz123",  # Pool fee destination
+  "networkType": "MainNet",
+  "coin": {
+    "name": "IndiCoin",
+    "symbol": "INDI",
+    "algorithm": "SHA256",
+    "normalisedSymbol": "INDI",
+    "segwit": true,
+    "powCapped": true,
+    "segwitActivationHeight": 0,
+    "versionGroupId": "0x00000000",
+    "paymentProcessing": {
+      "enabled": true,
+      "minimumPayment": 0.1,      # 0.1 INDI minimum payout
+      "payoutScheme": "PPLNS",
+      "payoutSchemeConfig": {
+        "factor": 2.0,
+        "window": 1440
+      }
+    }
+  },
+  "ports": {
+    "1234": {
+      "name": "Low diff",
+      "difficulty": 128,
+      "varDiff": {
+        "minDiff": 64,
+        "maxDiff": 131072,
+        "targetTime": 15,
+        "retargetTime": 90,
+        "variancePercent": 30
+      }
+    },
+    "3333": {
+      "name": "Medium diff", 
+      "difficulty": 1024,
+      "varDiff": {
+        "minDiff": 512,
+        "maxDiff": 1048576,
+        "targetTime": 15,
+        "retargetTime": 90,
+        "variancePercent": 30
+      }
+    },
+    "5555": {
+      "name": "High diff",
+      "difficulty": 8192,
+      "varDiff": {
+        "minDiff": 4096,
+        "maxDiff": 8388608,
+        "targetTime": 15,
+        "retargetTime": 90,
+        "variancePercent": 30
+      }
+    }
+  },
+  "daemons": [
+    {
+      "host": "127.0.0.1",
+      "port": 8332,
+      "user": "pool",
+      "password": "rpc_password_here"
+    }
+  ],
+  "walletDaemon": {
+    "host": "127.0.0.1", 
+    "port": 8332,
+    "user": "pool",
+    "password": "rpc_password_here"
+  },
+  "paymentProcessing": {
+    "enabled": true,
+    "minimumPayment": 0.1,
+    "payoutScheme": "PPLNS",
+    "payoutInterval": 60,            # Check for payouts every 60 minutes
+    "paymentProcessingInterval": 30, # Check every 30 seconds
+    "maturityInterval": 120,         # 2 hours before payout allowed
+    "maxBlockchainGap": 144          # 144 blocks (~24 hours) max gap
+  },
+  "blockUnlocker": {
+    "enabled": true,
+    "useP2SHMultisig": false,
+    "blockRefreshInterval": 1000,    # Check every second
+    "newBlockAmountConfirmations": 3,
+    "validateBlockHashes": false
+  },
+  "stratum": {
+    "enabled": true,
+    "listenAddress": "0.0.0.0",
+    "port": 3333,
+    "stratumSocketTimeout": 120,
+    "flushInterval": 10000,
+    "shareProcessing": {
+      "enabled": true,
+      "hashRateResendInterval": 60,
+      "enableClientReconnects": true,
+      "maxClientReconnects": 10,
+      "clientReconnectTimeout": 5
+    }
+  },
+  "api": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": 8080,
+    "rateLimit": {
+      "queries": 15,
+      "perSeconds": 60
+    }
+  },
+  "persistence": {
+    "postgres": {
+      "host": "localhost",
+      "port": 5432,
+      "user": "miningcore",
+      "password": "secure_password",
+      "database": "miningcore"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "enableConsoleLog": true,
+    "enableSyslog": true,
+    "enableFileLogging": true,
+    "logPath": "/var/log/miningcore/"
+  },
+  "metrics": {
+    "enabled": true,
+    "host": "0.0.0.0", 
+    "port": 8081,
+    "influxDb": {
+      "enabled": false,
+      "host": "localhost",
+      "port": 8086,
+      "database": "miningcore",
+      "username": "admin",
+      "password": "admin"
+    }
+  },
+  "adminCenter": {
+    "enabled": true,
+    "passwordHash": "$2a$16$8fYBzN6bT0nK8jU2p7gLrOBm8gV4q5vX7yA9c3d2e1f0a9b8c7d6e",  # hash for 'admin123'
+    "uiPassword": "admin123",
+    "listenAddress": "127.0.0.1",
+    "port": 8090,
+    "ssl": true,
+    "certificateFile": "/etc/ssl/certs/miningcore.crt",
+    "privateKeyFile": "/etc/ssl/private/miningcore.key"
+  },
+  "notifications": {
+    "enabled": true,
+    "email": {
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "secure": true,
+      "username": "pool@indicoin.org",
+      "password": "smtp_password",
+      "fromAddress": "pool@indicoin.org",
+      "toAddresses": ["admin@indicoin.org"],
+      "adminNotifications": {
+        "blockFound": true,
+        "blockConfirmed": true,
+        "paymentSent": true,
+        "paymentError": true,
+        "connectionError": true,
+        "minerDisconnected": true
+      }
+    }
+  },
+  "security": {
+    "banOnIpMismatch": true,
+    "banThreshold": 5,
+    "banDuration": 86400,
+    "loginRateLimit": {
+      "enabled": true,
+      "requests": 10,
+      "perSeconds": 60
+    }
+  }
+}

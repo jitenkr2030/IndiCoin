@@ -1,0 +1,33 @@
+[Unit]
+Description=IndiCoin Core Daemon
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+User=indicoin
+Group=indicoin
+ExecStart=/usr/local/bin/indicoind -daemon -conf=/etc/indicoin/indicoind.conf -pid=/var/run/indicoind/indicoind.pid
+ExecStop=/usr/bin/kill -HUP $(cat /var/run/indicoind/indicoind.pid)
+Restart=always
+RestartSec=10
+TimeoutStartSec=60
+TimeoutStopSec=120
+
+# Security settings
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/indicoin /var/log/indicoin /tmp
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Environment
+Environment=INCOIN_HOME=/var/lib/indicoin
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+[Install]
+WantedBy=multi-user.target
