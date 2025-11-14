@@ -1,0 +1,25 @@
+INDICOIN GENESIS BLOCK PARAMETERS
+===================================
+
+genesis_hash: 10e870f6ff26921e54f732934d368e495a49e9643d33a6854fe398fa803fabed
+merkle_root: f364e9da90a23b5a6a725e0b976fdd7aadc1531521323d720dbcac9befffb0da
+nonce: 0
+timestamp: 1763113202
+bits: 0x1d00ffff
+timestamp_msg: The Times 14/Nov/2025 - IndiCoin: Controlled Inflation Digital Currency
+
+C++ CODE FOR CHAINPARAMS.CPP:
+==============================
+
+genesis = CreateGenesisBlock(
+    "The Times 14/Nov/2025 - IndiCoin: Controlled Inflation Digital Currency", // pszTimestamp
+    indicon_genesis_script, // genesisOutputScript
+    1763113202, // nTime
+    0, // nNonce
+    0x1d00ffff, // nBits
+    1, // nVersion
+    5000000000 * COIN); // genesisReward
+
+consensus.hashGenesisBlock = genesis.GetHash();
+assert(consensus.hashGenesisBlock == uint256S("10e870f6ff26921e54f732934d368e495a49e9643d33a6854fe398fa803fabed"));
+assert(genesis.hashMerkleRoot == uint256S("f364e9da90a23b5a6a725e0b976fdd7aadc1531521323d720dbcac9befffb0da"));
