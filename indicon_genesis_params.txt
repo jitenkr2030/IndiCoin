@@ -1,0 +1,23 @@
+IndiCoin Genesis Block Parameters
+================================
+
+Based on Bitcoin genesis block with custom parameters:
+
+Timestamp: "The Times 03/Jan/2025 - IndiCoin: Controlled Inflation Digital Currency"
+nTime: 1763107813
+nNonce: 2083236893 (same as Bitcoin for simplicity)
+nBits: 0x1d00ffff (same as Bitcoin)
+nVersion: 1
+Genesis Reward: 50 * COIN
+
+genesis = CreateGenesisBlock(
+    1763107813, // nTime
+    2083236893, // nNonce
+    0x1d00ffff, // nBits
+    1,          // nVersion
+    50 * COIN   // genesisReward
+);
+
+Expected hashes (may need recalculation):
+- hashGenesisBlock: [needs to be calculated with actual mining]
+- hashMerkleRoot: 4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b

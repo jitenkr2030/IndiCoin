@@ -7,6 +7,7 @@
 #define BITCOIN_CHAIN_H
 
 #include <arith_uint256.h>
+#include <consensus/amount.h>
 #include <consensus/params.h>
 #include <flatfile.h>
 #include <kernel/cs_main.h>
@@ -136,6 +137,8 @@ public:
     //! to the genesis block or an assumeutxo snapshot block have reached the
     //! VALID_TRANSACTIONS level.
     uint64_t m_chain_tx_count{0};
+
+    CAmount nMoneySupply; // total supply up to this block
 
     //! Verification status of this block. See enum BlockStatus
     //!
@@ -358,6 +361,9 @@ public:
         READWRITE(obj.nTime);
         READWRITE(obj.nBits);
         READWRITE(obj.nNonce);
+        
+        // IndiCoin: Store money supply
+        READWRITE(obj.nMoneySupply);
     }
 
     uint256 ConstructBlockHash() const

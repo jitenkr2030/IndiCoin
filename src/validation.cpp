@@ -1916,17 +1916,28 @@ PackageMempoolAcceptResult ProcessNewPackage(Chainstate& active_chainstate, CTxM
     return result;
 }
 
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
+CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
 {
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
+    const int BLOCKS_PER_YEAR = 365 * 24 * 6;   // 52560
+    const CAmount BOOTSTRAP_REWARD = 10 * COIN; // year 0
+    const uint64_t RATE_MULT = 50000;           // 0.05 * 1e6
+
+    // Bootstrap year
+    if (nHeight < BLOCKS_PER_YEAR)
+        return BOOTSTRAP_REWARD;
+
+    if (!pindexPrev)
         return 0;
 
-    CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
-    return nSubsidy;
+    uint64_t prevSupply = (uint64_t)pindexPrev->nMoneySupply;
+
+    uint64_t subsidy = 
+        (prevSupply * RATE_MULT) / (BLOCKS_PER_YEAR * 1000000ULL);
+
+    if (subsidy == 0)
+        subsidy = 1; // minimum 1 satoshi
+
+    return subsidy;
 }
 
 CoinsViews::CoinsViews(DBParams db_params, CoinsViewOptions options)
@@ -2686,7 +2697,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
              Ticks<SecondsDouble>(m_chainman.time_connect),
              Ticks<MillisecondsDouble>(m_chainman.time_connect) / m_chainman.num_blocks_total);
 
-    CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, params.GetConsensus());
+    CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), pindex->pprev);
     if (block.vtx[0]->GetValueOut() > blockReward && state.IsValid()) {
         state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-amount",
                       strprintf("coinbase pays too much (actual=%d vs limit=%d)", block.vtx[0]->GetValueOut(), blockReward));
@@ -2701,6 +2712,11 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         LogInfo("Block validation error: %s", state.ToString());
         return false;
     }
+
+    // Update nMoneySupply for IndiCoin controlled inflation
+    CAmount prevSupply = pindex->pprev ? pindex->pprev->nMoneySupply : 0;
+    CAmount subsidy = GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), pindex->pprev);
+    pindex->nMoneySupply = prevSupply + subsidy + nFees;
     const auto time_4{SteadyClock::now()};
     m_chainman.time_verify += time_4 - time_2;
     LogDebug(BCLog::BENCH, "    - Verify %u txins: %.2fms (%.3fms/txin) [%.2fs (%.2fms/blk)]\n", nInputs - 1,
