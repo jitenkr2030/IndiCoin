@@ -98,7 +98,7 @@ brew install indicoin
 ```
 
 **Windows:**
-Download the installer from [indicoin.money/downloads](https://indicoin.org/downloads).
+Download the installer from [indicoin.money/downloads](https://indicoin.money/downloads).
 
 Running IndiCoin
 ----------------
