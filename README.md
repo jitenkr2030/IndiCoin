@@ -5,7 +5,7 @@ IndiCoin Integration/Staging Tree
 
 IndiCoin is a decentralized digital currency with controlled inflation, built on a fork of Bitcoin Core. It implements a 5% annual inflation rate to ensure sustainable growth and adoption while maintaining the security and decentralization principles of Bitcoin.
 
-**Official Website**: https://indicoin.org  
+**Official Website**: https://indicoin.money  
 **Community**: [Discord](https://discord.gg/indicoin) | [Telegram](https://t.me/indicoinofficial)  
 **Documentation**: https://docs.indicoin.org
 
@@ -82,7 +82,7 @@ Getting Started
 
 ### Binary Installation
 
-For the latest stable release, visit [indicoin.org/downloads](https://indicoin.org/downloads).
+For the latest stable release, visit [indicoin.money/downloads](https://indicoin.money/downloads).
 
 **Linux (Ubuntu/Debian):**
 ```bash
@@ -98,7 +98,7 @@ brew install indicoin
 ```
 
 **Windows:**
-Download the installer from [indicoin.org/downloads](https://indicoin.org/downloads).
+Download the installer from [indicoin.money/downloads](https://indicoin.org/downloads).
 
 Running IndiCoin
 ----------------
@@ -133,9 +133,9 @@ server=1
 port=5533
 
 # Peers
-addnode=seed1.indicoin.org
-addnode=seed2.indicoin.org
-addnode=seed3.indicoin.org
+addnode=seed1.indicoin.money
+addnode=seed2.indicoin.money
+addnode=seed3.indicoin.money
 
 # Performance
 dbcache=4000
@@ -183,7 +183,7 @@ IndiCoin uses SHA-256 Proof-of-Work mining. Solo mining is possible but pool min
 
 Join any IndiCoin mining pool that supports our network. Popular pools include:
 
-- **IndiCoin Pool**: https://pool.indicoin.org
+- **IndiCoin Pool**: https://pool.indicoin.money
 - **NiceHash**: https://nicehash.com
 - **F2Pool**: https://www.f2pool.com
 
@@ -236,8 +236,8 @@ Security
 Security is our top priority. If you discover a vulnerability, please report it responsibly:
 
 **Security Contact**: security@indicoin.org  
-**PGP Key**: [Download](https://indicoin.org/security-pgp.txt)  
-**Bug Bounty Program**: [indicoin.org/bounty](https://indicoin.org/bounty)
+**PGP Key**: [Download](https://indicoin.money/security-pgp.txt)  
+**Bug Bounty Program**: [indicoin.money/bounty](https://indicoin.money/bounty)
 
 ### Security Best Practices
 
@@ -260,12 +260,12 @@ Community
 
 Join our growing community:
 
-- **Website**: https://indicoin.org
+- **Website**: https://indicoin.money
 - **Discord**: https://discord.gg/indicoin
 - **Telegram**: https://t.me/indicoinofficial
 - **Twitter**: https://twitter.com/indicoinofficial
 - **Reddit**: https://reddit.com/r/indicoin
-- **Forum**: https://forum.indicoin.org
+- **Forum**: https://forum.indicoin.money
 
 Roadmap
 -------
@@ -324,10 +324,10 @@ Support
 
 Need help? Our support team is here to assist you:
 
-- **Documentation**: https://docs.indicoin.org
+- **Documentation**: https://docs.indicoin.money
 - **Community Support**: Discord/Telegram channels
 - **Bug Reports**: GitHub Issues
-- **General Inquiries**: support@indicoin.org
+- **General Inquiries**: support@indicoin.money
 
 Thank you for being part of the IndiCoin community!
 
