@@ -1,8 +1,6 @@
 IndiCoin Integration/Staging Tree
 ===================================
 
-![IndiCoin Logo]([)](https://chatgpt.com/s/m_6919261377e48191abbb4e8a9bd599f3)
-
 IndiCoin is a decentralized digital currency with controlled inflation, built on a fork of Bitcoin Core. It implements a 5% annual inflation rate to ensure sustainable growth and adoption while maintaining the security and decentralization principles of Bitcoin.
 
 **Official Website**: https://indicoin.money  
