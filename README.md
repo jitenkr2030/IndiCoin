@@ -5,7 +5,7 @@ IndiCoin is a decentralized digital currency with controlled inflation, built on
 
 **Official Website**: https://indicoin.money  
 **Community**: [Discord](https://discord.gg/indicoin) | [Telegram](https://t.me/indicoinofficial)  
-**Documentation**: https://docs.indicoin.org
+**Documentation**: https://docs.indicoin.money
 
 What is IndiCoin?
 -----------------
@@ -233,7 +233,7 @@ Security
 
 Security is our top priority. If you discover a vulnerability, please report it responsibly:
 
-**Security Contact**: security@indicoin.org  
+**Security Contact**: security@indicoin.money  
 **PGP Key**: [Download](https://indicoin.money/security-pgp.txt)  
 **Bug Bounty Program**: [indicoin.money/bounty](https://indicoin.money/bounty)
 
@@ -250,8 +250,8 @@ Network Status
 
 - **Mainnet Status**: Live
 - **Testnet**: Available for testing (-testnet flag)
-- **Block Explorer**: https://explorer.indicoin.org
-- **Network Statistics**: https://stats.indicoin.org
+- **Block Explorer**: https://explorer.indicoin.money
+- **Network Statistics**: https://stats.indicoin.money
 
 Community
 ---------
